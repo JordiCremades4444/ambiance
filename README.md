@@ -1,6 +1,6 @@
 # Ambiance
 
-A minimal audio player hosted on GitHub Pages. Full-screen background image, play/pause and stop buttons, loops automatically.
+Minimal ambient page on GitHub Pages: full-screen background, looping audio, elapsed timer. No controls — audio plays on load.
 
 ## Live
 
@@ -10,16 +10,14 @@ https://jordicremades4444.github.io/ambiance/
 
 | File | Purpose |
 |---|---|
-| `index.html` | The player page |
-| `audio.mp3` | The track that plays |
-| `background.jpg` | The background image |
+| `index.html` | The page |
+| `audio.mp3` | The track |
+| `background.jpg` | The background |
 
-## Changing the track
+## Swap the track
 
-Replace `audio.mp3` with a new file (keep the same name), then push. Or rename it and update the `src` attribute in the `<audio>` tag in `index.html`.
+Replace `audio.mp3` (keep the name), or rename it and update `src` in the `<audio>` tag. Keep under ~30 min / 100 MB (GitHub limit).
 
-> **Note:** keep the audio under ~30 minutes to stay within GitHub's 100 MB file size limit.
+## Swap the background
 
-## Changing the background
-
-Replace `background.jpg` with a new image (keep the same name), then push.
+Replace `background.jpg` (keep the name), then push.
