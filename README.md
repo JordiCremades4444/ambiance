@@ -14,10 +14,7 @@ https://jordicremades4444.github.io/ambiance/
 | `audio.mp3` | The track |
 | `background.jpg` | The background |
 
-## Swap the track
+## Swap the track or background
 
-Replace `audio.mp3` (keep the name), or rename it and update `src` in the `<audio>` tag. Keep under ~30 min / 100 MB (GitHub limit).
-
-## Swap the background
-
-Replace `background.jpg` (keep the name), then push.
+Replace `audio.mp3` (keep the name). Keep under ~30 min / 100 MB (GitHub limit).
+Replace `background.jpg` (keep the name).
