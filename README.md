@@ -17,4 +17,5 @@ https://jordicremades4444.github.io/ambiance/
 ## Swap the track or background
 
 Replace `audio.mp3` (keep the name). Keep under ~30 min / 100 MB (GitHub limit).
+
 Replace `background.jpg` (keep the name).
