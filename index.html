@@ -61,19 +61,10 @@
 
     button:active { transform: scale(0.97); }
 
-    #btn-play {
-      width: 88px;
-      height: 88px;
-    }
+    #btn-play { width: 88px; height: 88px; }
+    #btn-stop  { width: 60px;  height: 60px; }
 
-    #btn-stop {
-      width: 60px;
-      height: 60px;
-    }
-
-    #btn-play svg, #btn-stop svg {
-      pointer-events: none;
-    }
+    button svg { pointer-events: none; }
 
     .status {
       color: rgba(255,255,255,0.6);
@@ -81,18 +72,12 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-
-    /* Hide the YouTube iframe off-screen */
-    #yt-player {
-      position: fixed;
-      top: -9999px;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-    }
   </style>
 </head>
 <body>
+
+  <!-- CONFIG: swap the src to change the track -->
+  <audio id="audio" src="audio.mp3" preload="auto"></audio>
 
   <div class="player">
     <div class="controls">
@@ -112,90 +97,40 @@
         </svg>
       </button>
     </div>
-    <div class="status" id="status">Loading…</div>
+    <div class="status" id="status">Ready</div>
   </div>
 
-  <div id="yt-player"></div>
-
   <script>
-    // ── CONFIG — change VIDEO_ID to swap the track ──────────
-    const VIDEO_ID = 'bXTQiTuBkAs';
-    // ────────────────────────────────────────────────────────
+    const audio  = document.getElementById('audio');
+    const status = document.getElementById('status');
+    const iconPlay  = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
 
-    let player;
-    let ready = false;
-
-    window.onYouTubeIframeAPIReady = function () {
-      player = new YT.Player('yt-player', {
-        videoId: VIDEO_ID,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          iv_load_policy: 3,
-          modestbranding: 1,
-          rel: 0,
-        },
-        events: {
-          onReady: onReady,
-          onStateChange: onStateChange,
-        },
-      });
-    };
-
-    function onReady() {
-      ready = true;
-      setStatus('Ready');
-    }
-
-    function onStateChange(e) {
-      if (e.data === YT.PlayerState.PLAYING) {
-        setStatus('Playing');
-        showPause(true);
-      } else if (e.data === YT.PlayerState.PAUSED) {
-        setStatus('Paused');
-        showPause(false);
-      } else if (e.data === YT.PlayerState.ENDED) {
-        setStatus('Replaying…');
-        showPause(false);
-        player.seekTo(0);
-        player.playVideo();
-      } else if (e.data === YT.PlayerState.BUFFERING) {
-        setStatus('Buffering…');
-      }
-    }
+    audio.loop = true;
 
     function showPause(yes) {
-      document.getElementById('icon-play').style.display  = yes ? 'none' : '';
-      document.getElementById('icon-pause').style.display = yes ? ''     : 'none';
-    }
-
-    function setStatus(msg) {
-      document.getElementById('status').textContent = msg;
+      iconPlay.style.display  = yes ? 'none' : '';
+      iconPause.style.display = yes ? ''     : 'none';
     }
 
     document.getElementById('btn-play').addEventListener('click', () => {
-      if (!ready) return;
-      const state = player.getPlayerState();
-      if (state === YT.PlayerState.PLAYING) {
-        player.pauseVideo();
+      if (audio.paused) {
+        audio.play();
+        status.textContent = 'Playing';
+        showPause(true);
       } else {
-        player.playVideo();
+        audio.pause();
+        status.textContent = 'Paused';
+        showPause(false);
       }
     });
 
     document.getElementById('btn-stop').addEventListener('click', () => {
-      if (!ready) return;
-      player.stopVideo();
-      player.seekTo(0);
+      audio.pause();
+      audio.currentTime = 0;
+      status.textContent = 'Stopped';
       showPause(false);
-      setStatus('Stopped');
     });
-
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
   </script>
 </body>
 </html>
