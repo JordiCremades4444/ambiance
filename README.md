@@ -18,6 +18,8 @@ https://jordicremades4444.github.io/ambiance/
 
 Replace `audio.mp3` with a new file (keep the same name), then push. Or rename it and update the `src` attribute in the `<audio>` tag in `index.html`.
 
+> **Note:** keep the audio under ~30 minutes to stay within GitHub's 100 MB file size limit.
+
 ## Changing the background
 
 Replace `background.jpg` with a new image (keep the same name), then push.
